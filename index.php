@@ -1,4 +1,10 @@
 <?php
+//use \App\Route;
+require ('./autoload.php');
+
+//$route = new Route;
+
+dd($route);
 
 $default = parse_ini_file(".def");
 $conf =[];
@@ -16,10 +22,12 @@ function dd( $data ){
   echo 'console.log('. json_encode( $data ) .')';
    echo '</script>';
 }
-
 $page = $_GET;
-
 if($page){
+	
+		      /* $file  = substr($method, 0,strpos($match,'@'));
+        require '../http/controllers/'.$file."php";
+        $function = substr($method,strpos($method,'@')+1, strlen($method));*/
 	dd($page);
 }
 
@@ -36,4 +44,6 @@ if(count($matches[0]) > 0){
 }else{
 	$get = $_SERVER['REQUEST_URI'];
 }
+
+
 dd($get);
