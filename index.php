@@ -1,10 +1,8 @@
 <?php
-//use \App\Route;
+
 require ('./autoload.php');
 
-//$route = new Route;
 
-dd($route);
 
 $default = parse_ini_file(".def");
 $conf =[];
@@ -24,7 +22,7 @@ function dd( $data ){
 }
 $page = $_GET;
 if($page){
-	
+
 		      /* $file  = substr($method, 0,strpos($match,'@'));
         require '../http/controllers/'.$file."php";
         $function = substr($method,strpos($method,'@')+1, strlen($method));*/
