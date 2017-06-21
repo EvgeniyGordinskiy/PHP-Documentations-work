@@ -2,10 +2,23 @@
 namespace App\Api;
 
 
-class Route 
+abstract class Route
 {
-	public static function get ($path, $class)
+	static $routes = [];
+
+	public static function get ($path, $class, $call = 0)
+	{ 
+		if(!is_string($path)){
+			throw new \Exception();
+		}
+		if(!$call){
+			$routes['get'][] = $path;
+		}
+		
+	}
+
+	public static function checkGet ($get)
 	{
-	die($path);
+		return in_array($get, self::routes);
 	}
 } 

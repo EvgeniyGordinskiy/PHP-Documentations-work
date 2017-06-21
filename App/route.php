@@ -1,9 +1,9 @@
 <?php
 namespace App;
 
-Class Route implements Route
+Class Route
 {
-   private static $get = [];
+  /* private static $get = [];
 
 	public static function get ($path, $method)
 	{
@@ -15,5 +15,5 @@ Class Route implements Route
 	{
         return in_array($get, self::get);
 	}
-
+*/
 }
