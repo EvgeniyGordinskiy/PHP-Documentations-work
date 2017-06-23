@@ -43,7 +43,7 @@ function dd( $data ){
 
 $page = $_GET;
 if($page){
-	die(\App\Api\Route::checkGet('first'));
+	//	die(\App\Api\Route::checkGet('first'));
 		      /* $file  = substr($method, 0,strpos($match,'@'));
         require '../http/controllers/'.$file."php";
         $function = substr($method,strpos($method,'@')+1, strlen($method));*/

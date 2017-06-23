@@ -2,20 +2,36 @@
 require ('App/http/routes.php');
 
 if(isset($GLOBAL['get'])){
+    
+        if($method = \App\Api\Route::checkGet($GLOBAL['get'])) {
+            $variables = [];
 
-  
-    if($method = \App\Api\Route::checkGet($GLOBAL['get'])){
-        dd($method);
-        preg_match_all('/([^@]|\n)+/', $method, $match);
-        if($match[0][0]){
-            if($match[0][1]){
-                $addClass = 'App\\http\\controllers\\'.ucfirst($match[0][0]);
-                $cfunctionG = $match[0][1];
-               $callMethod = new $addClass();
-               //$callMethod->$cfunctionG();
+            if ($method[0] == '@' && $method[1] == '!') {
+                $numberVariables = $method[2];
+                $method = substr($method,3);
+                $checkVariable = explode('/', trim($GLOBAL['get'],"/"));
+                for($i = $numberVariables; $i > 0; $i--){
+                    $variables[] = $checkVariable[count($checkVariable)-$i];
+                }
+            }
+
+            if($variables){
+                $requestGet = explode('@',$method);
+                $addClass = 'App\\http\\controllers\\'.ucfirst($requestGet[0]);
+                $cfunctionG = $requestGet[1];
+                $callClass = new $addClass();
+                call_user_func_array(array($callClass,$cfunctionG),$variables);
+            }else{
+                $requestGet = explode('@',$method);
+                $addClass = 'App\\http\\controllers\\'.ucfirst($requestGet[0]);
+                $cfunctionG = $requestGet[1];
+                $callMethod = new $addClass();
+                $callMethod->$cfunctionG();
             }
         }
-    }
+
+
+           
 }
 
 

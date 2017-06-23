@@ -11,6 +11,7 @@ class Controller extends BaseController
 	}
 	
 	public function getFile ($folder, $file){
-		dd('getFile');
+		dd('folder = '.$folder);
+		dd('file = '.$file);
 	}
 }

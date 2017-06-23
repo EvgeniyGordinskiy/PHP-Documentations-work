@@ -11,12 +11,21 @@ abstract class Route
 		if(!is_string($path) && !is_string($class)){
 			throw new \Exception();
 		}
+		$requestGet = explode('@',$class);
+		if(count($requestGet) == 2 && strlen($requestGet[0]) > 0 && strlen($requestGet[1]) > 0) {
 			self::$routes['get'][] = $path;
 			self::$routes['get'][$path] = $class;
+		}else{
+			throw new \Exception();
+		}
 	}
 
 	public static function checkGet ($get)
 	{
+		if($get == "/"){
+			return  self::$routes['get'][$get];
+		}
+		
 		$get = trim($get,"/");
 		$firstOffset = explode('/', trim($get,"/"));
 
@@ -25,21 +34,23 @@ abstract class Route
 		}elseif(isset($firstOffset[0])){
 
 			foreach (self::$routes['get'] as $route){
-				$trueRoute = [];
+				$trueRoute = false;
+				$numberVariable = 0;
 				$firstOffsetRoute = explode('/', trim($route,"/"));
-				if(isset($firstOffsetRoute[0]) && $firstOffsetRoute[0] == $firstOffset[0] && count($firstOffsetRoute) == count($firstOffset)){
+				if(isset($firstOffsetRoute[0][0]) && $firstOffsetRoute[0] == $firstOffset[0] && count($firstOffsetRoute) == count($firstOffset)){
 					if($firstOffsetRoute[0][0] != "{" && substr($firstOffsetRoute[0], -1) != "}"){
 						foreach ($firstOffsetRoute as $key => $offset){
 							if($key != 0){
-								if($offset[0] != "{" && substr($offset, -1) != "}"){
-									$trueRoute[] = 1;
+								if($offset[0] == "{" && substr($offset, -1) == "}"){
+									$trueRoute = true;
+									$numberVariable++;
 								}
 							}
 						}
 					}
 				}
-				if(in_array(1, $trueRoute)){
-					return self::$routes['get'][$route];
+				if($trueRoute){
+					return "@!".$numberVariable.self::$routes['get'][$route];
 					break(1);
 				}
 			}

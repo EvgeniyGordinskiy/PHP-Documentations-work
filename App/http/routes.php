@@ -3,7 +3,6 @@ namespace App\http;
 
 use App\Api\Route;
 
-
 Route::get( 'get/{folder}/{file}', 'controller@getFile');
 Route::get('/', 'controller@home');
 

@@ -1,4 +1,4 @@
-* {box-sizing: border-box; margin: 0;}
+    * {box-sizing: border-box; margin: 0;}
 *{    font-family: "Bitter",serif;}
 
 ul{
@@ -44,6 +44,7 @@ ul{
   border-left: 10px solid transparent;
   transition: 0.5s opacity;
 }
+
 .p_menu:hover .v_menu{
   opacity: 1;
   top: 0;
