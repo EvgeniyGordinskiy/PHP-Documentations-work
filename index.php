@@ -8,26 +8,14 @@ spl_autoload_register(function ($class) {
 	}
 });
 
-preg_match_all('/\/(.+)\&/U', $_SERVER['REQUEST_URI'], $matches);
-$get = "";
-if(count($matches[0]) > 0){
-	$get .= $matches[1][0];
-}else{
-	$get = $_SERVER['REQUEST_URI'];
-}
 
-if($get){
-	$GLOBAL['get'] = $get;
-}
-
-require ('./autoload.php');
 
 
 $default = parse_ini_file(".def");
 $conf =[];
 foreach ($default as $key => $value) {
 	$conf[$key] = $value;
-	$GLOBAL[$key] = $value;
+	$GLOBALS[$key] = $value;
 }
 
 
@@ -48,8 +36,36 @@ if($page){
         require '../http/controllers/'.$file."php";
         $function = substr($method,strpos($method,'@')+1, strlen($method));*/
 }
+$postRequest = $_POST;
+if($postRequest){
+	if(isset($postRequest['url'])){
+		$GLOBALS['post']['url'] = $postRequest['url'];
+		unset($postRequest['url']); 
+	}
+
+	foreach ($postRequest as $name => $value) {
+		$GLOBALS['post']['variables'][$name] = $value;
+	}
+}
+
+preg_match_all('/\/(.+)\&/U', $_SERVER['REQUEST_URI'], $matches);
+$get = "";
+if(count($matches[0]) > 0){
+	$get .= $matches[1][0];
+}else{
+	$get = $_SERVER['REQUEST_URI'];
+}
+
+if($get){
+	$GLOBALS['get'] = $get;
+}
+
+require ('./autoload.php');
 
 $header = file_get_contents("Layouts/header.html");
 $body = file_get_contents("Layouts/body.html");
+if(isset($GLOBALS['bodyHtml'])){
+	$body.= $GLOBALS['bodyHtml'];
+}
 $footer = file_get_contents("Layouts/footer.html");
 echo $header.$body.$footer;

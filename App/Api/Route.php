@@ -20,6 +20,20 @@ abstract class Route
 		}
 	}
 
+		public static function post ($path, $class)
+	{ 
+		if(!is_string($path) && !is_string($class)){
+			throw new \Exception();
+		}
+		$requestPost = explode('@',$class);
+		if(count($requestPost) == 2 && strlen($requestPost[0]) > 0 && strlen($requestPost[1]) > 0) {
+			self::$routes['post'][] = $path;
+			self::$routes['post'][$path] = $class;
+		}else{
+			throw new \Exception();
+		}
+	}
+
 	public static function checkGet ($get)
 	{
 		if($get == "/"){
@@ -51,6 +65,45 @@ abstract class Route
 				}
 				if($trueRoute){
 					return "@!".$numberVariable.self::$routes['get'][$route];
+					break(1);
+				}
+			}
+		}
+		return false;
+	}
+
+
+public static function checkPost ($post)
+	{
+		if($post == "/"){
+			return  self::$routes['post'][$post];
+		}
+		
+		$post = trim($post,"/");
+		$firstOffset = explode('/', trim($post,"/"));
+
+		if(in_array($post, self::$routes['post'])){
+			return  self::$routes['post'][$post];
+		}elseif(isset($firstOffset[0])){
+
+			foreach (self::$routes['post'] as $route){
+				$trueRoute = false;
+				$numberVariable = 0;
+				$firstOffsetRoute = explode('/', trim($route,"/"));
+				if(isset($firstOffsetRoute[0][0]) && $firstOffsetRoute[0] == $firstOffset[0] && count($firstOffsetRoute) == count($firstOffset)){
+					if($firstOffsetRoute[0][0] != "{" && substr($firstOffsetRoute[0], -1) != "}"){
+						foreach ($firstOffsetRoute as $key => $offset){
+							if($key != 0){
+								if($offset[0] == "{" && substr($offset, -1) == "}"){
+									$trueRoute = true;
+									$numberVariable++;
+								}
+							}
+						}
+					}
+				}
+				if($trueRoute){
+					return "@!".$numberVariable.self::$routes['post'][$route];
 					break(1);
 				}
 			}

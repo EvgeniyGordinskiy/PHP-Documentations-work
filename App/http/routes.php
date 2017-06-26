@@ -6,4 +6,7 @@ use App\Api\Route;
 Route::get( 'get/{folder}/{file}', 'controller@getFile');
 Route::get('/', 'controller@home');
 
+Route::post('login', 'controller@login');
+
+
 
