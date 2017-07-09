@@ -28,6 +28,8 @@ if(isset($GLOBALS['get'])){
                 $callMethod = new $addClass();
                 $callMethod->$cfunctionG();
             }
+        }else{
+            $GLOBALS['bodyHtml'] = "undefind page";
         }
 
 

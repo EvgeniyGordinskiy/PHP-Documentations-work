@@ -1,28 +1,35 @@
 <?php
 namespace App\http\controllers;
 
+use App\Api\Auth\LoginModel;
 use App\Api\BaseController;
 
 class Controller extends BaseController
 {
 	public function home()
 	{
-		$test = 'vxcv';
 		$GLOBALS['bodyHtml'] = file_get_contents('Layouts/home.html');
 	}
 	
 	public function getFile ($folder, $file){
-		dd('folder = '.$folder);
-		dd('file = '.$file);
+		die($folder);
 	}
 
 	public function login()
 	{
-		var_dump($GLOBALS['post']['variables']);
-		if(isset($GLOBALS['post']['variables']['email']) && isset($GLOBALS['post']['variables']['password'])){
-			$email = $GLOBALS['post']['variables']['email'];
-			$pass = $GLOBALS['post']['variables']['password'];
-			dd(FILTER_VALIDATE_EMAIL($email));
+		$args['email'] = $GLOBALS['default']['args.auth.email'];
+		$args['pass'] = $GLOBALS['default']['args.auth.pass'];
+		var_dump(new LoginModel());
+		$check = filter_input_array(INPUT_POST, $args);
+		if(isset($check['email']) && isset($check['pass'])){
+			foreach ($check as &$value){
+				
+				$value = strtolower($value);
+			}
+			
+			
+			var_dump($check);
+
 		}
 		dd('login in controller');
 	}

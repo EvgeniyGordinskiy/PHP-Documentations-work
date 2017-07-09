@@ -11,16 +11,16 @@ spl_autoload_register(function ($class) {
 
 
 
-$default = parse_ini_file(".def");
-$conf =[];
-foreach ($default as $key => $value) {
-	$conf[$key] = $value;
-	$GLOBALS[$key] = $value;
-}
-
+$default = parse_ini_file(".env");
 
 function __get($variable){
-	return isset($conf[$variable])?$conf[$variable]: "";
+	return isset($GLOBALS[$variable])?$GLOBALS[$variable]: "";
+}
+
+function env($param =0){
+	if($param){
+		return isset($GLOBALS['default'][$param])?$GLOBALS['default'][$param]:false;
+	}
 }
 
 function dd( $data ){
@@ -60,12 +60,14 @@ if($get){
 	$GLOBALS['get'] = $get;
 }
 
+
 require ('./autoload.php');
 
-$header = file_get_contents("Layouts/header.html");
+$header = file_get_contents("Layouts/header.php");
 $body = file_get_contents("Layouts/body.html");
 if(isset($GLOBALS['bodyHtml'])){
 	$body.= $GLOBALS['bodyHtml'];
 }
 $footer = file_get_contents("Layouts/footer.html");
+
 echo $header.$body.$footer;

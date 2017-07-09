@@ -4,14 +4,18 @@
 	<title>Maximum power</title>
 	<link rel="stylesheet" type="text/css" href="/styles.css">
 	<script type="text/javascript" src="function.js"></script>
+	<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
 </head>
 <div class="header">
-<form action="index.php" method="POST" enctype="multipart/form-data" id="startForm">
-<input type="email" name="email">
-<input type="password" name="password">
-<input type="hidden" name="url" value="login">
-<button class="button" type="submit">Start test</button>
-</form>
+	<?php if(2 == 5): ?>
+	<form action="index.php" method="POST" enctype="multipart/form-data" id="startForm">
+	<input type="email" name="email">
+	<input type="password" name="pass">
+	<input type="hidden" name="url" value="login">
+	<button class="button" type="submit">Start test</button>
+	</form>
+	<?php endif; ?>
+
 	<div class="sidebar">
 	<!-- 	<ul class="menu">
 			<li class="p_menu"><a href="#">Documentation </a>
