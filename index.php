@@ -11,6 +11,7 @@ spl_autoload_register(function ($class) {
 
 
 
+
 $default = parse_ini_file(".env");
 
 function __get($variable){
@@ -24,9 +25,17 @@ function env($param =0){
 }
 
 function dd( $data ){
-  echo '<script>';
-  echo 'console.log('. json_encode( $data ) .')';
-   echo '</script>';
+	foreach ($data as $key => $p){
+		echo $key;
+		var_dump($p);
+	}
+}
+function ddd( $data = 0 ){
+	foreach ($data as $key => $p){
+		echo $key;
+		var_dump($p);
+	}
+	die();
 }
 
 $page = $_GET;
@@ -36,17 +45,7 @@ if($page){
         require '../http/controllers/'.$file."php";
         $function = substr($method,strpos($method,'@')+1, strlen($method));*/
 }
-$postRequest = $_POST;
-if($postRequest){
-	if(isset($postRequest['url'])){
-		$GLOBALS['post']['url'] = $postRequest['url'];
-		unset($postRequest['url']); 
-	}
 
-	foreach ($postRequest as $name => $value) {
-		$GLOBALS['post']['variables'][$name] = $value;
-	}
-}
 
 preg_match_all('/\/(.+)\&/U', $_SERVER['REQUEST_URI'], $matches);
 $get = "";

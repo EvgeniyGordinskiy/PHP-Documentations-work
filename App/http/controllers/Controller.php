@@ -33,4 +33,8 @@ class Controller extends BaseController
 		}
 		dd('login in controller');
 	}
+
+	public function add(){
+		ddd();
+	}
 }
