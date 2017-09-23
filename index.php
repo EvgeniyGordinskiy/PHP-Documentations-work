@@ -1,9 +1,16 @@
 <?php
 
+if (!($fp = fopen('String/Functions/data.txt', 'w'))) {
+    return;
+}
 
+setlocale(LC_MONETARY, 'en_US.UTF-8');
 
-fdfgffd gfdfg gfdfgfg gfdfgfgdfg gfdfg fdfg
-$s = iconv("ISO-8859-8", "UTF-8", hebrev(iconv("UTF-8", "ISO-8859-8", $s)));
+$money1 = 68.75;
+$money2 = 54.35;
+$money = $money1 + $money2;
+// echo $money выведет "123.1";
+//$len = fprintf($fp, '%01.2f', $money);
 
-// array get_html_transltion_table ([ int $table = HdffffffffffggggTML_SPECIALCHARS [, int $flags = ENT_COMPAT | ENT_HTML_401 [, string $encoding = "UTF-8"]]] )
-// get_html_translation_table will returndffffffffffffd the translation table that is used internally for htmlspecialchars() and htmletities()
+$format = 'Hey %s, you have %01.2f %s  left on your deposit. ';
+var_dump(fprintf($fp,$format, 'Man',  45, localeconv()['currency_symbol']));
