@@ -20,6 +20,6 @@ ENT_HTML5	Handle code as HTML 5.
 */
 
 
-htmlspecialchars("a\x80b", ENT_IGNORE);     //  "ab"
-htmlspecialchars("a\x80b", ENT_DISALLOWED);     //  ""
-htmlspecialchars("a\x80b", ENT_SUBSTITUTE); // 'a�b'
+htmlentities("a\x80b", ENT_IGNORE);     //  "ab"
+htmlentities("a\x80b", ENT_DISALLOWED);     //  ""
+htmlentities("a\x80b", ENT_SUBSTITUTE); // 'a�b'

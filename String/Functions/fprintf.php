@@ -1,4 +1,4 @@
-<?php
+    <?php
 
 // int fprintf ( resource $handle , string $format [, mixed $args [, mixed $... ]] )
 // Write a string produced according to format to the stream resource specified by handle.
@@ -31,9 +31,9 @@ if (!($fp = fopen('String/Functions/data.txt', 'w'))) {
     return;
 }
 
-fprintf($fp, "%04d-%02d-%02d", '2017', '9', '24') // write in the file: 2017-09-24
+fprintf($fp, "%04d-%02d-%02d", '2017', '9', '24'); // write in the file: 2017-09-24
 
-fprintf ("| %+-4d| %+-4d|\n", 1, -1);  //write in the file: output | +1  | -1  |
+fprintf($fp, "| %+-4d| %+-4d|\n", 1, -1);  //write in the file: output | +1  | -1  |
 
 setlocale(LC_MONETARY, 'en_US.UTF-8');
 $format = 'Hey %s, you have %01.2f %s  left on your deposit. ';
