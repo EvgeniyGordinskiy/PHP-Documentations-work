@@ -1,6 +1,5 @@
 <?php
+ 
+ $format = 'Hey %s, you have %01.2f %s left on your deposit. ';
 
-$str = "Hello,,,,,,pffffffffff";
- var_dump(sha1('hash')); //2346ad27d7568ba9896f1b7da6b5991251debdf2
-
-  
+var_dump(sprintf($format, 'Man',  45, localeconv()['currency_symbol'])); // S532
