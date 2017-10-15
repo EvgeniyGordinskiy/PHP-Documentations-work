@@ -1,5 +1,4 @@
 <?php
- 
- $format = 'Hey %s, you have %01.2f %s left on your deposit. ';
+$str = "Just a string with many words";
 
-var_dump(sprintf($format, 'Man',  45, localeconv()['currency_symbol'])); // S532
+var_dump(str_replace(['just', 'a'], ['full',''], $str,$count), $count);

@@ -4,4 +4,4 @@
 
 // Soundex keys have the property that words pronounced similarly produce the same soundex key, and can thus be used to simplify searches in databases where you know the pronunciation but not the spelling. This soundex function returns a string 4 characters long, starting with a letter.
 
-var_dump(sprintf($format, 'Man',  45, localeconv()['currency_symbol'])); // S532
+soundex("soundex"); // S532
