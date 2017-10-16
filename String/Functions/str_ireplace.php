@@ -18,3 +18,4 @@ str_ireplace('just', 'full', $str,$count);
  array (size=2)
   0 => string ' full a string with many words' (length=28)
   1 => string 'Another full a string with many words' (length=34)
+*/

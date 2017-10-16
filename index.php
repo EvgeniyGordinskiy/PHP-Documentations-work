@@ -1,4 +1,6 @@
 <?php
-$str = "Just a string with many words";
+//$str = "Just a string with many words";
+$str = 'Hello to all of Ukraine';
+//echo strtok($str, ' ').' '.strtok(' ').' '.strtok(' ');
 
-var_dump(str_replace(['just', 'string'], 'full', $str,$count));
+var_dump(strtok($str,' ').' '.strtok('o'));

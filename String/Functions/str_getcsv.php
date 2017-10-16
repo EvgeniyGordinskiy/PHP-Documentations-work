@@ -4,7 +4,7 @@
 
 // Parses a string input for fields in CSV format and returns an array containing the fields read.
 
-$csv = array_map('str_getcsv', file('users.csv'));
+$csv = array_map('str_getcsv', file('../../users.csv'));
 array_walk($csv, function(&$a) use ($csv) {
     $a = array_combine($csv[0], $a);
 });
