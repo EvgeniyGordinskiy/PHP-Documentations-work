@@ -1,5 +1,5 @@
 <?php
-$str1 = "rпр";
-$str2 = "redeпр";
-var_dump(chr('a3234')); // 1);
+$mystring = 'abc';
+$findme   = 'z';
+var_dump(strpos($mystring, $findme)); // 1);
 
